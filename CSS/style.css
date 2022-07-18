@@ -1,0 +1,46 @@
+body {
+  background-color: #ad3030ea;
+}
+
+header {
+  z-index: 100;
+}
+.tab-content {
+  min-height: 100vh;
+  background-color: antiquewhite;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+footer {
+  background: #88729b;
+  min-height: 100px;
+  z-index: 100;
+}
+
+footer footer p {
+  color: rgb(155, 114, 61);
+  text-align: center;
+}
+
+footer .what-logo {
+  position: fixed;
+  right: 40px;
+  bottom: 3px;
+  float: left;
+  margin-bottom: 30px;
+  z-index: 40;
+  perspective: 200px;
+  animation: what-logo 2s linear infinite;
+}
+@keyframes what-logo {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: rotateX(0deg) rotateY(180deg);
+  }
+  100% {
+    transform: rotateX(180deg) rotateY(180deg);
+  }
+}
