@@ -6,7 +6,54 @@ se quiere asegurar, se pulsa en boton "Abonar" y pasa a la siguiente pagina
 -3)En la ultima pagina muestra el total y se elije la forma de pago
 
 
+
+
+
+
+/*--Formilario inicial--*/
+
+let formulario = document.getElementById("formulario");
+let inputUsuario = document.getElementById("inputUsuario");
+let inputPassword = document.getElementById("inputPassword");
+
+formulario.onsubmit = (event) => validarFomrulario(event);
+function validarFomrulario(event) {
+  event.preventDefault();
+  console.log(event.target);
+  console.log("Ingreso el usuario");
+  console.log(inputUsuario.value);
+  console.log(inputPassword.value);
+  formulario.reset();
+}
+
+const btnMostrarAlert = document.getElementById("btn-ingreso");
+btnMostrarAlert.onclick = mostrarAlert;
+
+function mostrarAlert(e) {
+  e.preventDefault();
+  const valor = document.querySelector("#inputUsuario").value;
+  if (valor === "") {
+    Swal.fire({
+      title: "Error",
+      text: "Por favor ingrese un usuario",
+      icon: "error",
+      confirmButtonText: "Confirmar",
+    });
+  } else {
+    Swal.fire({
+      icon: "success",
+      title: "Bienvenido/a",
+      text: `${valor}`,
+    }).then((value) => {
+      if (value) {
+        window.location.href = "#page2";
+      }
+    });
+  }
+}
+
 /*--CLASES--*/
+
 class Seguro {
   constructor(id, nombreTipo, imagen, precio) {
     this.id = id;
@@ -31,8 +78,6 @@ class segElegido {
   }
 }
 
-/*--FUNCIONES--*/
-
 function renderCard(seguro) {
   let cardRendered = `
     <div class="card m-3" style="width: 18rem">
@@ -45,39 +90,6 @@ function renderCard(seguro) {
     </div>`;
   return cardRendered;
 }
-
-function borrarSeleccion() {
-  let divSeleccion = document.querySelector("#seleccion");
-  divSeleccion.innerHTML = "";
-}
-
-function cambiarSeleccion(seleccion) {
-  let divSeleccion = document.querySelector("#seleccion");
-  seleccion.seguros.forEach((seguro) => {
-    divSeleccion.innerHTML += renderCard(seguro);
-  });
-  divSeleccion.innerHTML += `
-  <h2>Total a pagar: $ ${seleccion.calcularTotal()}</h2>
-  `;
-}
-
-function renovarStorage() {
-  localStorage.removeItem("seleccion");
-  localStorage.setItem("seleccion", JSON.stringify(seleccion));
-}
-
-/*--Cargar seleccion en storage--*/
-
-window.addEventListener(`DOMContentLoaded`, (e) => {
-  let storage = JSON.parse(localStorage.getItem("seleccion"));
-  let seleccionGuardada = new segElegido(storage.id, storage.seguros);
-  storage.seguros.forEach((seguro) => {
-    seleccionGuardada.seguros.push(seguro);
-  });
-  console.log(seleccionGuardada);
-  borrarSeleccion();
-  cambiarSeleccion(seleccionGuardada);
-});
 
 /*--CATALOGO--*/
 
@@ -101,40 +113,124 @@ catalogoSeguros.push(seguro5);
 catalogoSeguros.push(seguro6);
 
 /*-- Generar mis tarjetas de seguros--*/
+
 let cardsDiv = document.querySelector("#cards");
 catalogoSeguros.forEach((seguro) => {
   cardsDiv.innerHTML += renderCard(seguro);
 });
 
-/*--Ingresar la seleccion de un seguro--*/
+const clickButton = document.querySelectorAll(".btn");
+const tbody = document.querySelector(".tbody");
+let carrito = [];
 
-let seleccion = new segElegido(1);
-let botones = document.querySelectorAll(".botonDeEleccion");
-let arrayDeBotones = Array.from(botones);
-arrayDeBotones.forEach((boton) => {
-  boton.addEventListener("click", (e) => {
-    let seguroSeleccionado = catalogoSeguros.find(
-      (seguro) => seguro.id == e.target.id
-    );
-    seleccion.seguros.push(seguroSeleccionado);
-    borrarSeleccion();
-    cambiarSeleccion(seleccion);
-    renovarStorage();
-  });
+clickButton.forEach((btn) => {
+  btn.addEventListener("click", addToCarrito);
 });
 
-/*--Formilario inicial--*/
+function addToCarrito(e) {
+  const button = e.target;
+  const item = button.closest(".card");
+  const itemTitle = item.querySelector(".card-title").textContent;
+  const itemPrice = item.querySelector(".card-text").textContent;
+  const itemImg = item.querySelector(".card-img-top").src;
 
-let formulario = document.getElementById("formulario");
-let inputUsuario = document.getElementById("inputUsuario");
-let inputPassword = document.getElementById("inputPassword");
+  const newItem = {
+    title: itemTitle,
+    precio: itemPrice,
+    img: itemImg,
+    cantidad: 1,
+  };
 
-formulario.onsubmit = (event) => validarFomrulario(event);
-function validarFomrulario(event) {
-  event.preventDefault();
-  console.log(event.target);
-  console.log("Ingreso el usuario");
-  console.log(inputUsuario.value);
-  console.log(inputPassword.value);
-  formulario.reset();
+  addItemCarrito(newItem);
 }
+
+function addItemCarrito(newItem) {
+  const inputElemento = tbody.getElementsByClassName("input_elemento");
+  for (let i = 0; i < carrito.length; i++) {
+    if (carrito[i].title.trim() === newItem.title.trim()) {
+      carrito[i].cantidad++;
+      const inputValue = inputElemento[i];
+      inputValue.value++;
+      carritoTotal();
+      return null;
+    }
+  }
+  carrito.push(newItem);
+  renderCarrito();
+}
+
+function renderCarrito() {
+  tbody.innerHTML = "";
+  carrito.map((item) => {
+    const tr = document.createElement("tr");
+    tr.classList.add("itemCarrito");
+    const Content = `
+    <th scope="row" >1</th>
+      <td class="table_productos">
+        <img src=${item.img}>
+        <h6 class="title>${item.title}</h6>
+      </td>
+      <td class="table_precio"><p>${item.precio}</p></td>
+      <td class="table_cantidad">
+        <input type="number" min="1" value=${item.cantidad} class="input_elemento">
+        <button class="delete btn btn-danger">X</button>
+      </td>
+    `;
+    tr.innerHTML = Content;
+    tbody.append(tr);
+
+    tr.querySelector(".delete").addEventListener("click", removeItemCarrito);
+    tr.querySelector(".input_elemento").addEventListener("change", suma);
+  });
+  carritoTotal();
+}
+
+function carritoTotal() {
+  let total = 0;
+  const itemCartTotal = document.querySelector(".itemCartTotal");
+  carrito.forEach((item) => {
+    const precio = Number(item.precio.replace("$", ""));
+    total = total + precio * item.cantidad;
+  });
+
+  itemCartTotal.innerHTML = `Total $ ${total}`;
+  addLocalStorage();
+}
+
+function removeItemCarrito(e) {
+  const buttonDelete = e.target;
+  const tr = buttonDelete.closest(".itemCarrito");
+  const title = tr.querySelector(".title").textContent;
+  for (let i = 0; i < carrito.length; i++) {
+    if (carrito[i].title.trim() === title.trim()) {
+      carrito.splice(i, 1);
+    }
+  }
+  tr.remove();
+  carritoTotal();
+}
+
+function suma(e) {
+  const sumaInput = e.target;
+  const tr = sumaInput.closest(".itemCarrito");
+  const title = tr.querySelector(".title").textContent;
+  carrito.forEach((item) => {
+    if (item.title.trim() === title) {
+      sumaInput.value < 1 ? (sumaInput.value = 1) : sumaInput.value;
+      item.cantidad = sumaInput.value;
+      carritoTotal();
+    }
+  });
+}
+
+function addLocalStorage() {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+window.onload = function () {
+  const storage = JSON.parse(localStorage.getItem("carrito"));
+  if (storage) {
+    carrito = storage;
+    renderCarrito();
+  }
+};

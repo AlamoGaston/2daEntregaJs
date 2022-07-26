@@ -11,8 +11,12 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   </head>
   <body>
+
+    <!-- /*--HEADER--*/ -->
+
     <header class="container-fluid bg-dark position-sticky top-2 header">
       <ul
         class="nav nav-pills mb-3 py-3 container"
@@ -21,8 +25,8 @@
       >
         <li class="nav-item" role="presentation">
           <a
-            class="nav-link"
-            id="pills-home-tab"
+            class="nav-link active"
+            id="page1"
             data-bs-toggle="pill"
             data-bs-target="#pills-home"
             type="button"
@@ -35,8 +39,8 @@
         </li>
         <li class="nav-item" role="presentation">
           <a
-            class="nav-link active"
-            id="pills-profile-tab"
+            class="nav-link"
+            id="page2"
             data-bs-toggle="pill"
             data-bs-target="#pills-profile"
             type="button"
@@ -50,7 +54,7 @@
         <li class="nav-item" role="presentation">
           <a
             class="nav-link"
-            id="pills-contact-tab"
+            id="page3"
             data-bs-toggle="pill"
             data-bs-target="#pills-contact"
             type="button"
@@ -66,8 +70,11 @@
 
     <div class="tab-content" id="pills-tabContent">
 
+
+      <!--/*--PRIMERA PAGINA: INGRESO--*/ -->
+      
       <div
-        class=" container tab-pane fade"
+        class=" container tab-pane fade show active"
         id="pills-home"
         role="tabpanel"
         aria-labelledby="pills-home-tab"
@@ -111,14 +118,14 @@
                 Olvide mi contraseña
               </label>
             </div class="mb-3">
-            <button type="submit" class="btn btn-primary">Ingresar</button>
+            <button type="submit" class="btn btn-primary"  id="btn-ingreso">Ingresar</button>
           </form>
         </div>
       </div>
 
-
+      <!-- /*--SEGUNDA PAGINA: SELECCION DE SEGUROS--*/-->
       <div
-        class="tab-pane fade show active"
+        class="tab-pane fade"
         id="pills-profile"
         role="tabpanel"
         aria-labelledby="pills-profile-tab"
@@ -130,10 +137,12 @@
             class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4"
             id="cards"
           ></div>
+          
+          <button class="btn btn-success " id="btn-eleccion">Cotizar</button>
         </section>
       </div>
 
-
+      <!-- /*--TERCERA PAGINA: TOTAL--*/ -->
       <div
         class="tab-pane fade"
         id="pills-contact"
@@ -143,12 +152,31 @@
       >
         <h2 class="h4 m-4 text-danger">Seguros seleccionados a abonar</h2>
 
-        <div class="container row mx-4" id="seleccion"></div>
-        <div class="col d-flex justify-content-end">
-          <button class="btn btn-success" id="btn">Pagar</button>
+        <table class="container-fluid table table-dark table-hover">
+          <thead>
+            <tr class="text-primary">
+              <th scope="col">#</th>
+              <th scope="col">Productos</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+            </tr>
+          </thead>
+          <tbody class="tbody">
+          </tbody>
+        </table>
+        <br><br>
+        <div class="row mx-4">
+          <div class="col">
+            <h3 class="itemCartTotal text-black">Total: 0</h3>
+          </div>
+          <div class="col d-flex justify-content-end">
+            <button class="btn btn-success">COMPRAR</button>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- /*--FOOTER--*/ -->
     
     <footer class="justify-content-center">
       <p class="fs-5 px-3  pt-3 m-0">&copy; Copyright 2022 <a href="Seguros GLA">Seguros GLA</a>
@@ -160,6 +188,9 @@
         </a>
     </div>
     </footer>
+
+    <!-- /*--SCRIPTS--*/ -->
+
     <script
       src="https://code.jquery.com/jquery-3.6.0.js"
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -170,6 +201,8 @@
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"
     ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="/JS/index.js"></script>
   </body>
 </html>
