@@ -11,70 +11,74 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
   </head>
   <body>
-
     <!-- /*--HEADER--*/ -->
 
     <header class="container-fluid bg-dark position-sticky top-2 header">
-      <ul
-        class="nav nav-pills mb-3 py-3 container"
-        id="pills-tab"
-        role="tablist"
-      >
-        <li class="nav-item" role="presentation">
-          <a
-            class="nav-link active"
-            id="page1"
-            data-bs-toggle="pill"
-            data-bs-target="#pills-home"
-            type="button"
-            role="tab"
-            aria-controls="pills-home"
-            aria-selected="true"
-          >
-            Registro
-          </a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a
-            class="nav-link"
-            id="page2"
-            data-bs-toggle="pill"
-            data-bs-target="#pills-profile"
-            type="button"
-            role="tab"
-            aria-controls="pills-profile"
-            aria-selected="false"
-          >
-            Cotizacion
-          </a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a
-            class="nav-link"
-            id="page3"
-            data-bs-toggle="pill"
-            data-bs-target="#pills-contact"
-            type="button"
-            role="tab"
-            aria-controls="pills-contact"
-            aria-selected="false"
-          >
-            Abonar
-          </a>
-        </li>
-      </ul>
+      <nav class="menu">
+        <ul
+          class="nav nav-pills mb-3 py-3 container"
+          id="pills-tab"
+          role="tablist"
+        >
+          <li class="nav-item" role="presentation" id="pag1">
+            <a
+              class="nav-link active"
+              id="page1"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-home"
+              type="button"
+              role="tab"
+              aria-controls="pills-home"
+              aria-selected="true"
+            >
+              Registro
+            </a>
+          </li>
+          <li class="nav-item" role="presentation" id="pag2">
+            <a
+              href="dos"
+              class="nav-link"
+              id="page2"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-profile"
+              type="button"
+              role="tab"
+              aria-controls="pills-profile"
+              aria-selected="false"
+            >
+              Seguros
+            </a>
+          </li>
+          <li class="nav-item" role="presentation" id="pag3">
+            <a
+              class="nav-link"
+              id="page3"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-contact"
+              type="button"
+              role="tab"
+              aria-controls="pills-contact"
+              aria-selected="false"
+            >
+              Cotizar
+            </a>
+          </li>
+        </ul>
+      </nav>
     </header>
 
     <div class="tab-content" id="pills-tabContent">
-
-
       <!--/*--PRIMERA PAGINA: INGRESO--*/ -->
-      
+
       <div
-        class=" container tab-pane fade show active"
+        class="container tab-pane fade show active"
         id="pills-home"
         role="tabpanel"
         aria-labelledby="pills-home-tab"
@@ -83,9 +87,9 @@
         <div class="container">
           <div class="mb-3 pri">
             <h1 class="titulo m-4 text-danger">SEGUROS AUTOMOTOR</h1>
-            <p class="h4 ">Por favor ingrese su usuario y contraseña</p>
+            <p class="h4">Por favor ingrese su usuario y contraseña</p>
           </div>
-          
+
           <form id="formulario">
             <div class="mb-5">
               <label class="form-label">Usuario</label>
@@ -117,8 +121,12 @@
               <label class="form-check-label" for="flexCheckChecked">
                 Olvide mi contraseña
               </label>
-            </div class="mb-3">
-            <button type="submit" class="btn btn-primary"  id="btn-ingreso">Ingresar</button>
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary" id="btn-ingreso">
+                Ingresar
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -131,14 +139,16 @@
         aria-labelledby="pills-profile-tab"
         tabindex="0"
       >
-        <h2 class="h4 m-4 text-danger">Seleccione el tipo de seguro y la cantidad de vehiculos que desea cotizar</h2>
+        <h2 class="h4 m-4 text-danger">
+          Seleccione el tipo de vehiculo que desea asegurar:
+        </h2>
         <section class="container top-0 cot">
           <div
             class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4"
             id="cards"
           ></div>
-          
-          <button class="btn btn-success " id="btn-eleccion">Cotizar</button>
+
+          <!-- <button class="btn btn-success " id="btn-eleccion">Cotizar</button> -->
         </section>
       </div>
 
@@ -150,7 +160,7 @@
         aria-labelledby="pills-contact-tab"
         tabindex="0"
       >
-        <h2 class="h4 m-4 text-danger">Seguros seleccionados a abonar</h2>
+        <h2 class="h4 m-4 text-danger">Seguros seleccionados a cotizar:</h2>
 
         <table class="container-fluid table table-dark table-hover">
           <thead>
@@ -161,32 +171,35 @@
               <th scope="col">Cantidad</th>
             </tr>
           </thead>
-          <tbody class="tbody">
-          </tbody>
+          <tbody class="tbody"></tbody>
         </table>
-        <br><br>
+        <br /><br />
         <div class="row mx-4">
           <div class="col">
             <h3 class="itemCartTotal text-black">Total: 0</h3>
           </div>
           <div class="col d-flex justify-content-end">
-            <button class="btn btn-success">COMPRAR</button>
+            <button class="btn btn-success" id="btn-pago">ABONAR</button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- /*--FOOTER--*/ -->
-    
+
     <footer class="justify-content-center">
-      <p class="fs-5 px-3  pt-3 m-0">&copy; Copyright 2022 <a href="Seguros GLA">Seguros GLA</a>
-        | Creado por  <a href="https://Alamogaston.github.io/">Alamo Gaston</a></p>
+      <p class="fs-5 px-3 pt-3 m-0">
+        &copy; Copyright 2022 <a href="Seguros GLA">Seguros GLA</a> | Creado por
+        <a href="https://Alamogaston.github.io/">Alamo Gaston</a>
+      </p>
 
       <div class="what-logo">
-        <a href="https://wa.me/5491131332857?text=Hola,%20vi%20un%20anuncio%20en%20internet%20y%20quisiera%20hacer%20una%20consulta">
-          <img src="./IMG/whas(1).jpg" alt="">
+        <a
+          href="https://wa.me/5491131332857?text=Hola,%20vi%20un%20anuncio%20en%20internet%20y%20quisiera%20hacer%20una%20consulta"
+        >
+          <img src="./IMG/whas(1).jpg" alt="" />
         </a>
-    </div>
+      </div>
     </footer>
 
     <!-- /*--SCRIPTS--*/ -->
@@ -202,7 +215,10 @@
       crossorigin="anonymous"
     ></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
     <script src="/JS/index.js"></script>
   </body>
 </html>

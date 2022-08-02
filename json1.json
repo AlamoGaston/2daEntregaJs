@@ -1,0 +1,32 @@
+[
+  {
+    "nameType": "Moto Responsabilidad civil",
+    "id": 1,
+    "price": 500
+  },
+  {
+    "name": "Moto Contra todo riesgo",
+    "id": 2,
+    "price": 1000
+  },
+  {
+    "name": "Auto Responsabilidad civil",
+    "id": 3,
+    "price": 750
+  },
+  {
+    "name": "Auto Contra todo riesgo",
+    "id": 4,
+    "price": 2000
+  },
+  {
+    "name": "Camion Responsabilidad civil",
+    "id": 5,
+    "price": 1000
+  },
+  {
+    "name": "Camion Contra todo riesgo",
+    "id": 6,
+    "price": 5000
+  }
+]
